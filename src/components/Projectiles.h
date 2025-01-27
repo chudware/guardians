@@ -23,6 +23,6 @@ typedef struct Projectile
 Projectile CreateProjectiles(Vector2 position, float rotation);
 bool UpdateProjectiles(Projectile* projectile, float frametime, float time);
 void DrawProjectiles(Projectile projectile);
-void DrawStoneGuardianProjectiles(Projectile projectile);
+//void DrawStoneGuardianProjectiles(Projectile projectile);
 
 #endif

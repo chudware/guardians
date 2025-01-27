@@ -10,8 +10,7 @@
 #include "player/PlayerController.h"
 #include "player/PlayerProjectiles.h"
 #include "entities/Enemy.h"
-#include "entities/StoneGuardianLeft.h"
-#include "entities/StoneGuardianLeftProjectiles.h"
+#include "entities/StoneGuardian.h"
 
 int main(void)
 {
@@ -24,8 +23,7 @@ int main(void)
     InitPlayerProjectiles();
     InitPlayer();
     InitEnemy();
-    InitStoneGuardianLeftProjectiles();
-    InitStoneGuardianLeft();
+    InitStoneGuardian();
     InitDebug();
     InitCam();
 
@@ -36,8 +34,8 @@ int main(void)
         UpdatePlayerProjectiles();
         UpdatePlayer();
         UpdateEnemy();
-        UpdateStoneGuardianLeftProjectiles();
-        UpdateStoneGuardianLeft();
+        UpdateStoneGuardian();
+        UpdateStoneGuardianProjectiles();
         UpdateDebug();
         UpdatePlayerHUD();
         UpdateCam();
@@ -52,13 +50,12 @@ int main(void)
         DrawPlayerProjectiles();
         DrawPlayer();
         DrawEnemy();
-        DrawStoneGuardianLeftProjectiles();
-        DrawStoneGuardianLeft();
+        DrawStoneGuardianProjectiles();
+        DrawStoneGuardian();
         DrawDebug();
         EndMode2D();
         DrawDebugHUD();
         DrawPlayerHUD();
-        DrawStoneGuardianLeftHPBar();
         EndDrawing();
     }
 

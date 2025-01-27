@@ -6,6 +6,7 @@
 typedef struct Entity
 {
     Vector2 position;
+    Vector2 velocity;
     bool active;
     bool right;
     bool up;
