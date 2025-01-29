@@ -51,11 +51,14 @@ void InitStoneGuardian()
 void UpdateStoneGuardian()
 {
     float frameTime = GetFrameTime();
-    if (StoneGuardian.x <= 1024)
+    if (StoneGuardian.hp > 0)
     {
-        StoneGuardian.x += StoneGuardian.speed * frameTime;
-        if (StoneGuardian.y <= 480)
-            StoneGuardian.y += StoneGuardian.speed * frameTime;
+        if (StoneGuardian.x <= 1024)
+        {
+            StoneGuardian.x += StoneGuardian.speed * frameTime;
+            if (StoneGuardian.y <= 480)
+                StoneGuardian.y += StoneGuardian.speed * frameTime;
+        }
     }
 }
 
@@ -148,6 +151,6 @@ void DrawStoneGuardian()
     }
     else
     {
-        DrawText("Stone Guardian defeated!", 512, 512, 20, RED);
+        DrawText("Stone Guardian defeated!", StoneGuardian.x, StoneGuardian.y, 20, RED);
     }
 }
