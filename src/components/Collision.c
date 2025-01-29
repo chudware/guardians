@@ -9,7 +9,7 @@
 
 extern Entity player;
 extern Projectile _projectiles[MAX_PROJECTILES];
-extern Rectangle stoneGuardianLeftRecSrc;
+extern Rectangle StoneGuardianRecSrc;
 extern Texture2D bagTexture;
 extern Entity StoneGuardian;
 extern Rectangle StoneGuardianTextureRecDest;
@@ -43,9 +43,35 @@ void UpdateCollision()
     }
 
     StoneGuardianTextureRecDest = (Rectangle){StoneGuardian.x - StoneGuardian.width / 2, StoneGuardian.y - StoneGuardian.height / 2, StoneGuardian.width, StoneGuardian.height};
-    if (CheckCollisionRecs(playerRect, StoneGuardianTextureRecDest))
+
+    // check collision between enemies and player projectiles
+    for (int i = 0; i < MAX_PROJECTILES; i++)
     {
-        StoneGuardian.hp -= player.damage;
+        if (_projectiles[i].active)
+        {
+            Rectangle projectileRect = {
+                _projectiles[i].position.x - _projectiles[i].width / 2,
+                _projectiles[i].position.y - _projectiles[i].height / 2,
+                _projectiles[i].width,
+                _projectiles[i].height};
+
+            // check for guardian collision
+            Rectangle StoneGuardianRecSrc = {
+                StoneGuardian.x - StoneGuardian.width / 2,
+                StoneGuardian.y - StoneGuardian.height / 2,
+                StoneGuardian.width,
+                StoneGuardian.height};
+
+            if (CheckCollisionRecs(StoneGuardianRecSrc, projectileRect))
+            {
+                _projectiles[i].active = false; // deactivate projectile on collision
+                StoneGuardian.hp -= 10;
+                if (StoneGuardian.hp <= 0)
+                {
+                    StoneGuardian.active = false; // deactivate enemy if HP is 0 or less
+                }
+            }
+        }
     }
 }
 

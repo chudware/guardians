@@ -49,11 +49,10 @@ void DrawProjectiles(Projectile projectile)
     {
         return;
     }
-
     Rectangle rect = {projectile.position.x, projectile.position.y, projectile.width, projectile.height};
     Rectangle dest = {projectile.position.x, projectile.position.y, projectile.width * 6, projectile.height * 6};
     Vector2 origin = {rect.width / 2, rect.height / 2}; // try replacing rect.width with projectile.width later
     DrawRectanglePro(rect, origin, projectile.rotation, GREEN);
     DrawTexturePro(projectileTexture, rect, dest, origin, projectile.rotation, WHITE);
-    //DrawTexturePro(enemyTexture, enemyRecSrc, enemyRecDest, (Vector2){0, 0}, 0, WHITE);
+    // DrawTexturePro(enemyTexture, enemyRecSrc, enemyRecDest, (Vector2){0, 0}, 0, WHITE);
 }

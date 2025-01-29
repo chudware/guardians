@@ -6,7 +6,7 @@
 #include "../components/Entity.h"
 #include "../player/Player.h"
 
-#define MAX_PROJECTILES 666 // Increased to allow for continuous shooting
+#define MAX_PROJECTILESSTONEGUARDIAN 666 // Increased to allow for continuous shooting
 
 typedef struct Projectile
 {
@@ -26,7 +26,7 @@ Rectangle StoneGuardianTextureRecDest;
 Vector2 guardianPosition;
 Vector2 origin;
 Texture2D projectileImage;
-Projectile projectiles[MAX_PROJECTILES] = {0};
+Projectile projectiles[MAX_PROJECTILESSTONEGUARDIAN] = {0};
 
 float projectileSpeed = 500.0f;
 float projectileRadius = 5.0f;
@@ -41,7 +41,7 @@ void InitStoneGuardian()
     StoneGuardianTextureRecDest = (Rectangle){0, 0, StoneGuardianTexture.width, StoneGuardianTexture.height};
     StoneGuardian.x = 256;
     StoneGuardian.y = 256;
-    StoneGuardian.hp = 100.0f;
+    StoneGuardian.hp = 45000.0f;
     StoneGuardian.width = 112;
     StoneGuardian.height = 112;
     guardianPosition = (Vector2){StoneGuardian.x, StoneGuardian.y};
@@ -67,14 +67,14 @@ int projectileCounts[4] = {0}; // track projectiles per direction
 void UpdateStoneGuardianProjectiles()
 {
     origin = (Vector2){StoneGuardian.x, StoneGuardian.y};
-    int maxProjectilesPerDirection = MAX_PROJECTILES / 4; // distribute evenly
+    int maxProjectilesPerDirection = MAX_PROJECTILESSTONEGUARDIAN / 4; // distribute evenly
 
     for (int i = 0; i < 4; i++)
     {
         if (projectileCounts[i] < maxProjectilesPerDirection)
         {
             int projectileIndex = -1;
-            for (int j = 0; j < MAX_PROJECTILES; j++)
+            for (int j = 0; j < MAX_PROJECTILESSTONEGUARDIAN; j++)
             {
                 if (!projectiles[j].active)
                 {
@@ -100,7 +100,7 @@ void UpdateStoneGuardianProjectiles()
     }
 
     // update existing active projectiles and decrement counts when projectiles go out of bounds
-    for (int i = 0; i < MAX_PROJECTILES; i++)
+    for (int i = 0; i < MAX_PROJECTILESSTONEGUARDIAN; i++)
     {
         if (projectiles[i].active)
         {
@@ -130,7 +130,7 @@ void DrawStoneGuardianProjectiles()
 {
     if (StoneGuardian.hp > 0)
     {
-        for (int i = 0; i < MAX_PROJECTILES; i++)
+        for (int i = 0; i < MAX_PROJECTILESSTONEGUARDIAN; i++)
         {
             if (projectiles[i].active)
             {

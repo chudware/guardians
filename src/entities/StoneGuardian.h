@@ -1,5 +1,6 @@
 #ifndef STONEGUARDIAN_H
 #define STONEGUARDIAN_H
+#define MAX_PROJECTILESSTONEGUARDIAN 666
 
 extern Rectangle StoneGuardianTextureRecDest;
 

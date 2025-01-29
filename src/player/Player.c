@@ -33,9 +33,9 @@ void InitPlayer()
     player.speed = 200.0f;
     player.lvl = 0.0f;
     player.maxlvl = 0.0f;
-    player.xp = 0.0f;
+    player.xp = 20.0f;
     player.maxxp = 96.0f;
-    player.hp = 120.0f;
+    player.hp = 20.0f;
     player.maxhp = 120.0f;
     player.mp = 120.0f;
     player.maxmp = 120.0f;
