@@ -40,6 +40,7 @@ void InitPlayer()
     player.mp = 120.0f;
     player.maxmp = 120.0f;
     player.rotation = 0.0f;
+    player.damage = 10.0f;
 }
 
 void UpdatePlayer()

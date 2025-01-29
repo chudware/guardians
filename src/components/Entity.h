@@ -26,6 +26,7 @@ typedef struct Entity
     float rotation;
     float timer;
     float lastDirectionChange;
+    float damage;
 } Entity;
 
 #endif

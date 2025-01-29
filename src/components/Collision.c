@@ -1,5 +1,7 @@
 #include <raylib.h>
 #include "../components/Entity.h"
+#include "../entities/Enemy.h"
+#include "../entities/StoneGuardian.h"
 #include "../player/Player.h"
 #include "../player/PlayerProjectiles.h"
 
@@ -9,6 +11,8 @@ extern Entity player;
 extern Projectile _projectiles[MAX_PROJECTILES];
 extern Rectangle stoneGuardianLeftRecSrc;
 extern Texture2D bagTexture;
+extern Entity StoneGuardian;
+extern Rectangle StoneGuardianTextureRecDest;
 
 Rectangle topCollisionRect = {144, 144, 1392, 48};     // top
 Rectangle bottomCollisionRect = {144, 1104, 1392, 48}; // bottom
@@ -36,6 +40,12 @@ void UpdateCollision()
     if (CheckCollisionRecs(playerRect, right1CollisionRect))
     {
         player.position.x -= player.speed * frameTime;
+    }
+
+    StoneGuardianTextureRecDest = (Rectangle){StoneGuardian.x - StoneGuardian.width / 2, StoneGuardian.y - StoneGuardian.height / 2, StoneGuardian.width, StoneGuardian.height};
+    if (CheckCollisionRecs(playerRect, StoneGuardianTextureRecDest))
+    {
+        StoneGuardian.hp -= player.damage;
     }
 }
 

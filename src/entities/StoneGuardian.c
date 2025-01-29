@@ -41,6 +41,7 @@ void InitStoneGuardian()
     StoneGuardianTextureRecDest = (Rectangle){0, 0, StoneGuardianTexture.width, StoneGuardianTexture.height};
     StoneGuardian.x = 256;
     StoneGuardian.y = 256;
+    StoneGuardian.hp = 100.0f;
     StoneGuardian.width = 112;
     StoneGuardian.height = 112;
     guardianPosition = (Vector2){StoneGuardian.x, StoneGuardian.y};
@@ -58,12 +59,12 @@ void UpdateStoneGuardian()
     }
 }
 
-int projectileCounts[4] = {0};  // track projectiles per direction
+int projectileCounts[4] = {0}; // track projectiles per direction
 
 void UpdateStoneGuardianProjectiles()
 {
     origin = (Vector2){StoneGuardian.x, StoneGuardian.y};
-    int maxProjectilesPerDirection = MAX_PROJECTILES / 4;   // distribute evenly
+    int maxProjectilesPerDirection = MAX_PROJECTILES / 4; // distribute evenly
 
     for (int i = 0; i < 4; i++)
     {
@@ -124,18 +125,29 @@ void UpdateStoneGuardianProjectiles()
 
 void DrawStoneGuardianProjectiles()
 {
-    for (int i = 0; i < MAX_PROJECTILES; i++)
+    if (StoneGuardian.hp > 0)
     {
-        if (projectiles[i].active)
+        for (int i = 0; i < MAX_PROJECTILES; i++)
         {
-            DrawCircle((int)projectiles[i].position.x, (int)projectiles[i].position.y, projectiles[i].radius, projectiles[i].color);
-            DrawTexture(projectileImage, (int)projectiles[i].position.x - projectiles[i].radius, (int)projectiles[i].position.y - projectiles[i].radius, projectiles[i].color); // dead code, doesn't work, might fix it later
+            if (projectiles[i].active)
+            {
+                DrawCircle((int)projectiles[i].position.x, (int)projectiles[i].position.y, projectiles[i].radius, projectiles[i].color);
+                DrawTexture(projectileImage, (int)projectiles[i].position.x - projectiles[i].radius, (int)projectiles[i].position.y - projectiles[i].radius, projectiles[i].color); // dead code, doesn't work, might fix it later
+            }
         }
     }
 }
 
 void DrawStoneGuardian()
 {
-    StoneGuardianTextureRecDest = (Rectangle){StoneGuardian.x - StoneGuardian.width / 2, StoneGuardian.y - StoneGuardian.height / 2, StoneGuardian.width, StoneGuardian.height};
-    DrawTexturePro(StoneGuardianTexture, StoneGuardianTextureRecSrc, StoneGuardianTextureRecDest, (Vector2){0, 0}, 0, WHITE);
+    if (StoneGuardian.hp > 0)
+    {
+        StoneGuardianTextureRecDest = (Rectangle){StoneGuardian.x - StoneGuardian.width / 2, StoneGuardian.y - StoneGuardian.height / 2, StoneGuardian.width, StoneGuardian.height};
+        DrawTexturePro(StoneGuardianTexture, StoneGuardianTextureRecSrc, StoneGuardianTextureRecDest, (Vector2){0, 0}, 0, WHITE);
+        DrawText(TextFormat("HP: %.0f", StoneGuardian.hp), StoneGuardian.x - 32, StoneGuardian.y - 64, 20, RED);
+    }
+    else
+    {
+        DrawText("Stone Guardian defeated!", 512, 512, 20, RED);
+    }
 }
